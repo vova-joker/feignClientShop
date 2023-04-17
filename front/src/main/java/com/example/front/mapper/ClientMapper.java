@@ -1,7 +1,7 @@
 package com.example.front.mapper;
 
 import com.example.front.entity.Client;
-import feignClientDemo.front.dto.*;
+import feignClientShop.front.dto.*;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -10,6 +10,8 @@ import java.util.List;
 public interface ClientMapper {
 
     ClientGetResultDto mapClientToClientGetResultDto(Client client);
+
+    Client mapClientGetResultDtoToClient(ClientGetResultDto client);
 
     List<ClientGetResultDto> mapClientsToListOfClientGetResultDto(List<Client> clientList);
 

@@ -9,7 +9,7 @@ tags:
   - name: client
     description: Front request handler
 paths:
-  "/simple/client/{id}":
+  "/client/{id}":
     get:
       tags:
         - client
@@ -29,59 +29,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ClientGetResultDto"
-  "/simple/client":
-    get:
-      tags:
-        - client
-      summary: get all clients
-      operationId: getAll
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ClientGetResultDto"
-  "/simple/client/post":
-    post:
-      tags:
-        - client
-      summary: add client to db
-      operationId: addClient
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ClientPostDto"
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientPostResultDto"
-  "/simple/client/update":
-    put:
-      tags:
-        - client
-      summary: update client in db
-      operationId: updateClient
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ClientUpdateDto"
-        required: true
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientUpdateResultDto"
-  "/simple/client/delete/{id}":
     delete:
       tags:
         - client
@@ -101,6 +48,57 @@ paths:
             application/json:
               schema:
                 type: string
+  "/client":
+    get:
+      tags:
+        - client
+      summary: get all clients
+      operationId: getAll
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClientGetResultDto"
+    post:
+      tags:
+        - client
+      summary: add client to db
+      operationId: addClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientPostDto"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientPostResultDto"
+    put:
+      tags:
+        - client
+      summary: update client in db
+      operationId: updateClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientUpdateDto"
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientUpdateResultDto"
+
 
 components:
   schemas:

@@ -1,18 +1,21 @@
 package com.example.warehouse.service;
 
 import com.example.warehouse.entity.Product;
+import feignClientShop.front.dto.ProductPostDto;
+import feignClientShop.front.dto.ProductResultDto;
+import feignClientShop.front.dto.ProductUpdateDto;
 
 import java.util.List;
 
 public interface ProductService {
 
-    Product getProductById(Long id);
+    ProductResultDto getProductById(Long id);
 
-    List<Product> getAllProducts();
+    List<ProductResultDto> getAllProducts();
 
-    Product addProduct(Product product);
+    ProductResultDto addProduct(ProductPostDto productPostDto);
 
-    Product updateProduct(Product product);
+    ProductResultDto updateProduct(ProductUpdateDto productUpdateDto);
 
     String deleteProduct(Long id);
 }

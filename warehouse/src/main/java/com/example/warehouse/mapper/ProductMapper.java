@@ -1,9 +1,9 @@
 package com.example.warehouse.mapper;
 
 import com.example.warehouse.entity.Product;
-import feignClientDemo.front.dto.ProductPostDto;
-import feignClientDemo.front.dto.ProductResultDto;
-import feignClientDemo.front.dto.ProductUpdateDto;
+import feignClientShop.front.dto.ProductPostDto;
+import feignClientShop.front.dto.ProductResultDto;
+import feignClientShop.front.dto.ProductUpdateDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -12,6 +12,8 @@ import java.util.List;
 public interface ProductMapper {
 
     ProductResultDto mapProductToProductResultDto(Product product);
+
+    Product mapProductResultDtoToProduct(ProductResultDto productResultDto);
 
     Product mapProductUpdateDtoToProduct(ProductUpdateDto productUpdateDto);
 

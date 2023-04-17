@@ -1,14 +1,12 @@
 package com.example.front.service;
 
-import com.example.front.entity.Client;
+import com.example.front.mapper.ClientMapper;
 import com.example.front.repository.ClientRepository;
+import feignClientShop.front.dto.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -16,31 +14,53 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientService{
     private final ClientRepository clientRepository;
 
+    private final ClientMapper clientMapper;
+
     @Override
-    public Client getClientById(Long id) {
-        Optional<Client> optionalClient = clientRepository.findById(id);
-        return optionalClient.orElseThrow(() -> new RuntimeException("Client with id = "+ id +" is not found"));
+    public ClientGetResultDto getClientById(Long id) {
+        return clientMapper.mapClientToClientGetResultDto(
+                clientRepository.findById(id).orElseThrow(
+                        () -> new RuntimeException(
+                                "Client with id = "+ id +" is not found"
+                        )
+                )
+        );
     }
 
     @Override
-    public List<Client> getAllClient() {
-        return clientRepository.findAll();
+    public List<ClientGetResultDto> getAllClients() {
+        return clientMapper.mapClientsToListOfClientGetResultDto(
+                clientRepository.findAll()
+        );
     }
 
     @Override
-    public Client addClient(Client client) {
-        return clientRepository.saveAndFlush(client);
+    public ClientPostResultDto addClient(ClientPostDto clientPostDto) {
+        return clientMapper.mapClientToClientPostResultDto(
+                clientRepository.saveAndFlush(
+                        clientMapper.mapClientPostDtoToClient(
+                                clientPostDto
+                        )
+                )
+        );
     }
 
     @Override
-    public Client updateClient(Client client) {
-        return clientRepository.saveAndFlush(client);
+    public ClientUpdateResultDto updateClient(ClientUpdateDto clientUpdateDto) {
+        return clientMapper.mapClientToClientUpdateResultDto(
+                clientRepository.saveAndFlush(
+                        clientMapper.mapClientUpdateDtoToClient(clientUpdateDto
+                        )
+                )
+        );
     }
 
     @Override
     public String deleteClient(Long id) {
-        Client client = getClientById(id);
-        clientRepository.delete(client);
-        return "Client with name " + client.getName() + " was successfully deleted!";
+        ClientGetResultDto clientGetResultDto = getClientById(id);
+        if(clientGetResultDto != null)
+            clientRepository.delete(clientMapper.mapClientGetResultDtoToClient(getClientById(id)));
+        else return "Client with id = "+id+" was not found!";
+        return "Client with name " + clientGetResultDto.getName() + " was successfully deleted!";
     }
 }

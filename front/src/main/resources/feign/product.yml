@@ -9,7 +9,7 @@ tags:
   - name: product
     description: warehouse handler
 paths:
-  "/wh/product/{id}":
+  "/warehouse/product/{id}":
     get:
       tags:
         - product
@@ -50,7 +50,7 @@ paths:
               schema:
                 type: string
 
-  "/wh/product":
+  "/warehouse/product":
     get:
       tags:
         - product

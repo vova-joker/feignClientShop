@@ -1,14 +1,12 @@
 package com.example.front.service;
 
-
-import com.example.front.entity.Client;
-
+import feignClientShop.front.dto.*;
 import java.util.List;
 
 public interface ClientService {
-    Client getClientById(Long id);
-    List<Client> getAllClient();
-    Client addClient(Client client);
-    Client updateClient(Client client);
+    ClientGetResultDto getClientById(Long id);
+    List<ClientGetResultDto> getAllClients();
+    ClientPostResultDto addClient(ClientPostDto clientPostDto);
+    ClientUpdateResultDto updateClient(ClientUpdateDto clientUpdateDto);
     String deleteClient(Long id);
 }
